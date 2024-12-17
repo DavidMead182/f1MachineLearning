@@ -1,0 +1,43 @@
+body {
+    background-color: #FFFF;
+    color: #000000;
+    font-family:  Arial, Helvetica, sans-serif;
+}
+
+
+.link {
+    text-decoration: none; /* Removes underline */
+    color: inherit; /* Makes the color the same as the parent element */
+}
+
+.link:hover, .link:focus {
+    text-decoration: none; /* Removes underline on hover */
+    color: inherit; /* Keeps the color unchanged */
+}
+
+.centre {
+    text-align: center;
+}
+
+.card {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 0% 10% 0% 10%;   /* top right bottom left */
+    padding: 0.25em 2em 0.25em 2em; /* top right bottom left */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-image {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.centre-vert {
+    display: flex;
+    align-items: center;
+}
