@@ -1,51 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'base.css' %}">
-    <title>PredictF1 - Homepage</title>
+{% extends "base.html" %}
 
-    <script>
-        function toggleTheme() {
-            var themeImage = document.getElementById("theme_switch");
-            var currentSrc = themeImage.src;
-            var currentFilename = currentSrc.split('/').pop();
-    
-            if (currentFilename === "sun.png") {
-                themeImage.src = "{% static 'moon.png' %}";
-            } else {
-                themeImage.src = "{% static 'sun.png' %}";
-            }
+{% block title %}Homepage{% endblock %}
 
-            return false;
-        }
-    </script>
-</head>
+{% block content %}
+    <h1>Welcome to PredictF1</h1>
+    <p>Use the navigation bar to access the different pages</p>
+{% endblock %}
 
-<body>
-    <div class="card">
-        <div class="navbar centre-vert">
-            <a href="" class ="link header"><p>PredictF1</p></a>
-            <div class="navbar centre-vert">
-                <a href="" class ="link header"><p><img class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a></p>
-                <div style="margin-right: 20px;"></div>
-                <a href="" onmouseup="toggleTheme()"><img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image"></a>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="card" style="margin-top: 10px;">
-        <div class="centre">
-            <h2>Most Recent Race Dashboard</h2>
-        </div>
-        <div class="centre">
-            <img src="{% static 'profileicon.png' %}" alt="Profile Picture">
-        </div>
-    <footer>
-    </footer>
-
-</body>
-</html>

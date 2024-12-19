@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <title>PredictF1 - {% block title %} {% endblock %}</title>
+
+    <script>
+        function toggleTheme() {
+            var themeImage = document.getElementById("theme_switch");
+            var currentSrc = themeImage.src;
+            var currentFilename = currentSrc.split('/').pop();
+    
+            if (currentFilename === "sun.png") {
+                themeImage.src = "{% static 'moon.png' %}";
+            } else {
+                themeImage.src = "{% static 'sun.png' %}";
+            }
+
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="card">
+        <div class="navbar centre-vert">
+            <a href="" class ="link header"><p>PredictF1</p></a>
+            <div class="navbar centre-vert">
+                <a href="" class ="link header"><p><img class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a></p>
+                <div style="margin-right: 20px;"></div>
+                <div><img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 10px;">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer>
+    </footer>
+
+</body>
+</html>
