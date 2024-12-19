@@ -1,27 +1,39 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
 <div class="card light card-top-bottom">
-    <h1 class="centre">Most Recent Race Dashboard</h1>
-    <table class="table light">
-        <thead>
-            <tr>
-                <th>Position</th>
-                <th>Driver</th>
-                <th>Time</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in results %}
-            <tr>
-                <td>{{ result.Position }}</td>
-                <td>{{ result.Abbreviation }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <p class="header centre">Most Recent Race Dashboard - {{ eventName }}</p>
+    <div class = "navbar">
+        <div class = "centre" style="width: 15%;">
+            <p class="smallheader">Standings</p>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Driver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    <tr>
+                        <td>{{ result.Position }}</td>
+                        <td>{{ result.Abbreviation }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="centre" style="width: 60%;">
+            <p class="smallheader centre">Fastest Lap Telemetry</p>
+            <img class="plot" src="{% static '/images/recent_tel.png' %}" alt="Fastest Lap Telemetry">
+        </div>
+
+    </div>
 </div>
 {% endblock %}
+
 

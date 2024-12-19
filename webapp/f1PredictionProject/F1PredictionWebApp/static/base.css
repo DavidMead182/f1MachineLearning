@@ -29,6 +29,11 @@ body {
     }
 }
 
+.smallheader{
+    font-size: 3vh;
+    color: #FF1801;
+}
+
 .light {
     color: #000000;
     background-color: #ffffff;
@@ -95,4 +100,14 @@ body {
     padding-top: 1em;
     padding-bottom: 1em;
 
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.plot {
+    width: 75%;
+    height: auto;
 }

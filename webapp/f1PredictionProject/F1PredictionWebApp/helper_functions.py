@@ -6,6 +6,7 @@ import fastf1
 from datetime import date,datetime, timezone,timedelta
 import fastf1
 import pandas as pd
+import os
 
 def most_recent_race():
     today = date.today()
@@ -55,6 +56,10 @@ def telementry(year, session_number):
                         boundaries=np.arange(1, 10))
     cbar.set_ticks(np.arange(1.5, 9.5))
     cbar.set_ticklabels(np.arange(1, 9))
+
+    if os.path.exists('./F1PredictionWebApp/static/images/recent_tel.png'):
+            os.remove('./F1PredictionWebApp/static/images/recent_tel.png')  # Remove the existing file
     
-    
-    plt.show()
+    plt.savefig('./F1PredictionWebApp/static/images/recent_tel.png', bbox_inches='tight', dpi=300)
+
+    return '/images/recent_tel.png'
