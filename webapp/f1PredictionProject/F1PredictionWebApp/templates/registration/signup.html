@@ -3,9 +3,34 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<div>
-    <!-- Registration form -->
-    <form method="post" enctype="multipart/form-data"></form>
-    </form>
+<div class="card light card-top-bottom centre">
+    <p class="smallheader">Sign Up</p>
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.username.label }}
+            {{ form.username }}
+            <br>
+            {{ form.email.label }}
+            {{ form.email }}
+            <br>
+            {{ form.password1.label }}
+            {{ form.password1 }}
+            <br>
+            {{ form.password2.label }}
+            {{ form.password2 }}
+            <br>
+            {{ form.errors }}
+            <br>
+            {% for message in messages %}
+
+            <p>{{ message }}</p>
+
+            {% endfor %}
+            <input type="submit" name="Create User" />
+        </form>
+
+    </div>
+
 </div>
 {% endblock %}

@@ -108,6 +108,6 @@ body {
 }
 
 .plot {
-    width: 75%;
-    height: auto;
+    width: auto;
+    height: 75vh;
 }

@@ -1,4 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from .forms import CreateUserForm
+from django.contrib.auth import authenticate, login, logout
+
 import fastf1 as ff1
 
 # Create your views here.
@@ -17,15 +22,61 @@ def index(request):
         "results": results.to_dict(orient='records')}
     return render(request, 'index.html', context)
 
-def login(request):
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            messages.info(request, 'Username or password is incorrect')            
     context = {}
-    return render(request, "registration/login.html", context)
+    return render(request,'registration/login.html',context)
 
 def signup(request):
-    context = {}
-    return render(request, "registration/signup.html", context)
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Account created successfully' + user)
+            return redirect('login')
+        
+    context = {'form': form}
+    return render(request, 'registration/signup.html', context)
+    
+def logouts(request):
+    logout(request)
+    return redirect('index')
 
 
+from django.contrib.auth.views import PasswordResetView
+
+class CustomPasswordResetView(PasswordResetView):
+ template_name = 'password_reset.html'
+ email_template_name = 'password_reset_email.html'
+ subject_template_name = 'password_reset_subject.txt'
+ success_url = '/password_reset/done/' 
+
+from django.contrib.auth.views import PasswordResetConfirmView
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+ template_name = 'password_reset_confirm.html'
+ success_url = '/password_reset/complete/' 
+
+
+
+
+
+
+
+# Helper functions
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import colormaps
