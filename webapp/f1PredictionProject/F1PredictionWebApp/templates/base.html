@@ -12,11 +12,25 @@
             var themeImage = document.getElementById("theme_switch");
             var currentSrc = themeImage.src;
             var currentFilename = currentSrc.split('/').pop();
-    
+            var body = document.body;
+            var cards = document.querySelectorAll('.card');
+
             if (currentFilename === "sun.png") {
                 themeImage.src = "{% static 'moon.png' %}";
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                cards.forEach(function(card) {
+                    card.classList.remove('light');
+                    card.classList.add('dark');
+                });
             } else {
                 themeImage.src = "{% static 'sun.png' %}";
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                cards.forEach(function(card) {
+                    card.classList.remove('dark');
+                    card.classList.add('light');
+                });
             }
 
             return false;
@@ -25,8 +39,8 @@
 
 </head>
 
-<body>
-    <div class="card">
+<body class="light-mode">
+    <div class="card light">
         <div class="navbar centre-vert">
             <a href="{% url 'index' %}" class ="link header"><p>PredictF1</p></a>
             <div class="navbar centre-vert">
@@ -39,7 +53,7 @@
         </div>
     </div>
 
-    <div class="card" style="margin-top: 10px;">
+    <div class="card light" style="margin-top: 10px;">
         {% block content %}
         {% endblock %}
     </div>

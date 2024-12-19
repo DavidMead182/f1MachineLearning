@@ -4,15 +4,37 @@
 }
 
 
+
+
 body {
+    font-family:  site-font;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.light-mode {
     background-color: #f7f7f7;
     color: #000000;
-    font-family:  site-font;
+}
+
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 .header {
     font-size: 3vh;
     font-weight: bold;
+}
+
+.light {
+    color: #000000;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.dark {
+    color: #ffffff;
+    background-color: #000000;
+    box-shadow: 0 4px 8px rgba(26, 26, 26, 0.1);
 }
 
 
@@ -31,9 +53,8 @@ body {
 }
 
 .card{
-    background-color: #ffff;
+    /* background-color: #ffff; */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 0 2em 0 2em; /* Top, right, bottom, left */ 
     margin: 0% 10% 0% 10%; /* Top, right, bottom, left */
 }
@@ -44,8 +65,8 @@ body {
 }
 
 .profile-image {
-    height: 1.75em;
-    width: 1.75em;
+    height: 2em;
+    width: 2em;
 }
 
 .centre-vert {
