@@ -31,7 +31,7 @@
             <a href="{% url 'index' %}" class ="link header"><p>PredictF1</p></a>
             <div class="navbar centre-vert">
                 {% if user.is_authenticated %}
-                    <a href="" class ="link header"><p><img class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a></p>
+                    <a href="" class ="link"><p><img class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a></p>
                 {% endif %}
                 <div style="margin-right: 20px;"></div>
                 <div><img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()"></div>
