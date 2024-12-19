@@ -5,5 +5,11 @@
 {% block content %}
     <h1>Welcome to PredictF1</h1>
     <p>Use the navigation bar to access the different pages</p>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}</p>     
+    {% else %}
+        <p>Welcome, guest</p>
+        <p> login/sign up using the profile button at the top</p>
+    {% endif %}
 {% endblock %}
 
