@@ -3,15 +3,25 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<div class="card light">
-    <h1>Welcome to PredictF1</h1>
-    <p>Use the navigation bar to access the different pages</p>
-    {% if user.is_authenticated %}
-        <p>Welcome, {{ user.username }}</p>     
-    {% else %}
-        <p>Welcome, guest</p>
-        <p> login/sign up using the profile button at the top</p>
-    {% endif %}
+<div class="card light card-top-bottom">
+    <h1 class="centre">Most Recent Race Dashboard</h1>
+    <table class="table light">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Driver</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.Position }}</td>
+                <td>{{ result.Abbreviation }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
 

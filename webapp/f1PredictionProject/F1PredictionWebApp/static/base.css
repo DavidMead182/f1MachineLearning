@@ -3,9 +3,6 @@
     src: url('./fonts/Sansation-Light.ttf');
 }
 
-
-
-
 body {
     font-family:  site-font;
     transition: background-color 0.3s, color 0.3s;
@@ -24,6 +21,12 @@ body {
 .header {
     font-size: 3vh;
     font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .header {
+        font-size: 3vh;
+    }
 }
 
 .light {
@@ -86,4 +89,10 @@ body {
 
 .button-red:hover{
     color: #FF1801;
+}
+
+.card-top-bottom{
+    padding-top: 1em;
+    padding-bottom: 1em;
+
 }
