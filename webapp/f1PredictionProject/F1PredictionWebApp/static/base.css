@@ -17,7 +17,7 @@ body {
 }
 
 .dark-mode {
-    background-color: #1a1a1a;
+    background-color: #000;
     color: #ffffff;
 }
 
@@ -31,9 +31,10 @@ body {
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .dark {
     color: #ffffff;
-    background-color: #000000;
+    background-color: #1a1a1a;
     box-shadow: 0 4px 8px rgba(26, 26, 26, 0.1);
 }
 
@@ -72,4 +73,17 @@ body {
 .centre-vert {
     display: flex;
     align-items: center;
+}
+
+.split{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.justify-content {
+    display: flex;
+}
+
+.button-red:hover{
+    color: #FF1801;
 }

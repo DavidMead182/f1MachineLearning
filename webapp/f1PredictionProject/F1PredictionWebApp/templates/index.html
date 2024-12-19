@@ -3,6 +3,7 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
+<div class="card light">
     <h1>Welcome to PredictF1</h1>
     <p>Use the navigation bar to access the different pages</p>
     {% if user.is_authenticated %}
@@ -11,5 +12,6 @@
         <p>Welcome, guest</p>
         <p> login/sign up using the profile button at the top</p>
     {% endif %}
+</div>
 {% endblock %}
 

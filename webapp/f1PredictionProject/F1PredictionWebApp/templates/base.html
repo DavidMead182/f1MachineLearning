@@ -10,6 +10,8 @@
     <script>
         function toggleTheme() {
             var themeImage = document.getElementById("theme_switch");
+            var profileImage = document.getElementById("profile_image");
+
             var currentSrc = themeImage.src;
             var currentFilename = currentSrc.split('/').pop();
             var body = document.body;
@@ -17,6 +19,9 @@
 
             if (currentFilename === "sun.png") {
                 themeImage.src = "{% static 'moon.png' %}";
+                if (profileImage) {
+                    profileImage.src = "{% static 'light-profile-icon.png' %}";
+                }
                 body.classList.remove('light-mode');
                 body.classList.add('dark-mode');
                 cards.forEach(function(card) {
@@ -25,6 +30,9 @@
                 });
             } else {
                 themeImage.src = "{% static 'sun.png' %}";
+                if (profileImage) {
+                    profileImage.src = "{% static 'profileicon.png' %}";
+                }
                 body.classList.remove('dark-mode');
                 body.classList.add('light-mode');
                 cards.forEach(function(card) {
@@ -42,21 +50,29 @@
 <body class="light-mode">
     <div class="card light">
         <div class="navbar centre-vert">
-            <a href="{% url 'index' %}" class ="link header"><p>PredictF1</p></a>
+            <a href="{% url 'index' %}" class ="link header"><p class="button-red">PredictF1</p></a>
             <div class="navbar centre-vert">
                 {% if user.is_authenticated %}
-                    <a href="" class ="link"><p><img class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a></p>
+                    <a href="" class ="link"><p><img id="profile_image" class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a></p>
                 {% endif %}
                 <div style="margin-right: 20px;"></div>
-                <div><img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()"></div>
+                <img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()">
             </div>
         </div>
     </div>
 
-    <div class="card light" style="margin-top: 10px;">
-        {% block content %}
-        {% endblock %}
+    <div style="margin-top: 20px;"></div>
+    {% if not user.is_authenticated %}
+    <div class="card light">
+        <div class="navbar centre-vert centre">
+            <a href="{% url 'login' %}" class ="link button-red"><p>Login</p></a>
+            <a href="{% url 'signup' %}" class ="link button-red"><p>Sign Up</p></a>
+        </div>
     </div>
+    {% endif %}
+    <div style="margin-top: 20px;"></div>
+    {% block content %}
+    {% endblock %}
     <footer>
     </footer>
 
