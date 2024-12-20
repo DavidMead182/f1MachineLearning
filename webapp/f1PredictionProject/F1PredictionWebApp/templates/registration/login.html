@@ -3,17 +3,29 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="card light card-top-bottom">
-    <!-- Login form -->
-    <form method="POST" action="">
-        {% csrf_token %}
-        <h2>Login</h2>
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <input type="submit" value="Login" />
-    </form>
-    {% for message in messages %}
-    <p>{{ message }}</p>
-    {% endfor %}
+<div class="centreDiv">
+    <div class="card light card-top-bottom centreDiv" style="width: 25em;">
+        <!-- Login form -->
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p class="smallheader centre form-title">Login</p>
+            <label class="header" for="username">Username:</label>
+            <br>
+            <input type="text" class="input-box" name="username" placeholder="Username" required />
+            <br>
+            <br>
+            <label class="header" for="password">Password:</label>
+            <br>
+            <input type="password" class="input-box" name="password" placeholder="Password" required />
+            <br>
+            <br>
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+            <div class="centre">
+                <input class="button-white button"  type="submit" value="Login" />
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

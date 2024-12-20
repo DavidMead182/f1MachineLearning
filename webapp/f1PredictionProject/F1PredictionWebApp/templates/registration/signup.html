@@ -3,34 +3,41 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<div class="card light card-top-bottom centre">
-    <p class="smallheader">Sign Up</p>
-    <div>
+<div class="centreDiv">
+    <div class="card light card-top-bottom centreDiv" style="width: 25em;">
         <form action="" method="POST">
+            <p class="smallheader centre form-title">Sign Up</p>
             {% csrf_token %}
-            {{ form.username.label }}
-            {{ form.username }}
+            <label class="header" for="username">Username:</label>
             <br>
-            {{ form.email.label }}
-            {{ form.email }}
+            <input type="text" class="input-box" name="username" placeholder="Username" required />
             <br>
-            {{ form.password1.label }}
-            {{ form.password1 }}
             <br>
-            {{ form.password2.label }}
-            {{ form.password2 }}
+            <label class="header" for="email">Email:</label>
             <br>
-            {{ form.errors }}
+            <input type="email" class="input-box" name="email" placeholder="Email" required />
+            <br>
+            <br>
+            <label class="header" for="password1">Password:</label>
+            <br>
+            <input type="password" class="input-box" name="password1" placeholder="Password" required />
+            <br>
+            <br>
+            <label class="header" for="password2">Confirm Password:</label>
+            <br>
+            <input type="password" class="input-box" name="password2" placeholder="Confirm Password" required />
+            <br>
             <br>
             {% for message in messages %}
 
             <p>{{ message }}</p>
 
             {% endfor %}
-            <input type="submit" name="Create User" />
+            <div class="centre">
+                <input class="button-white button" type="submit" name="Create User" />
+            </div>
         </form>
 
     </div>
-
 </div>
 {% endblock %}

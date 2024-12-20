@@ -34,6 +34,8 @@ body {
     color: #FF1801;
 }
 
+
+
 .light {
     color: #000000;
     background-color: #ffffff;
@@ -96,6 +98,27 @@ body {
     color: #FF1801;
 }
 
+.button-white:hover{
+    color: #fff;
+    background-color: #FF1801;
+}
+
+.button-white{
+    color: #FF1801;
+    background-color: #fff;
+}
+
+.button{
+    width: 20em; 
+    border-radius: 5px; 
+    height: 5vh;
+    font-family: site-font;
+    font-weight: bold;
+    font-size: 2vh;
+    border-width: 2px;
+
+}
+
 .card-top-bottom{
     padding-top: 1em;
     padding-bottom: 1em;
@@ -110,4 +133,24 @@ body {
 .plot {
     width: auto;
     height: 75vh;
+}
+
+.centreDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-box{
+    border-radius: 5px;
+    border-width: 2px;
+    height: 5vh; 
+    font-family: site-font; 
+    width: 20em; 
+    font-size: 2.5vh;
+}
+
+.form-title{
+    font-weight: bold;
+    font-size: 5vh;
 }
