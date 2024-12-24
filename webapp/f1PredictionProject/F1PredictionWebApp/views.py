@@ -49,12 +49,18 @@ def signup(request):
             return redirect('login')
         
     context = {'form': form}
-    messages.info(request, 'Username or password is incorrect')
+    # messages.info(request, 'Username or password is incorrect')
     return render(request, 'registration/signup.html', context)
     
 def logouts(request):
     logout(request)
     return redirect('index')
+
+def about_page(request):
+    return render(request, 'about.html')
+
+def nextSteps(request):
+    return render(request, 'nextSteps.html')
 
 
 from django.contrib.auth.views import PasswordResetView

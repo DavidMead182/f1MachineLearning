@@ -4,7 +4,7 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<div class="card light card-top-bottom">
+<div class="nav-card light">
     <p class="header centre">Most Recent Race Dashboard - {{ eventName }}</p>
     <div class = "navbar">
         <div class = "centre" style="width: 15%;">
@@ -25,11 +25,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-
-        <div class="centre" style="width: 60%;">
-            <p class="smallheader centre">Fastest Lap Telemetry</p>
-            <img class="plot" src="{% static '/images/recent_tel.png' %}" alt="Fastest Lap Telemetry">
         </div>
 
     </div>

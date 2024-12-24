@@ -6,6 +6,7 @@
 body {
     font-family:  site-font;
     transition: background-color 0.3s, color 0.3s;
+    margin: 1% 10% 0% 10%; /* Top, right, bottom, left */
 }
 
 .light-mode {
@@ -52,6 +53,7 @@ body {
 .link {
     text-decoration: none; /* Removes underline */
     color: inherit; /* Makes the color the same as the parent element */
+    font-weight: bold;
 }
 
 .link:hover, .link:focus {
@@ -63,16 +65,15 @@ body {
     text-align: center;
 }
 
-.card{
+.navbar {
+    display: flex;
+    /* justify-content: space-between; */
+}
+
+.nav-card {
     /* background-color: #ffff; */
     border-radius: 8px;
     padding: 0 2em 0 2em; /* Top, right, bottom, left */ 
-    margin: 0% 10% 0% 10%; /* Top, right, bottom, left */
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
 }
 
 .profile-image {
@@ -148,6 +149,7 @@ body {
     font-family: site-font; 
     width: 20em; 
     font-size: 2.5vh;
+    padding-left: 1vh;
 }
 
 .form-title{
