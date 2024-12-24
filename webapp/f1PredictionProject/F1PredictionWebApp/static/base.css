@@ -156,3 +156,7 @@ body {
     font-weight: bold;
     font-size: 5vh;
 }
+
+.card-padding{
+    padding: 1em;
+}
