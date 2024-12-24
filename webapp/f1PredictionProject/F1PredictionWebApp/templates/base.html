@@ -6,12 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <title>PredictF1 - {% block title %} {% endblock %}</title>
+    <style>
+        /* Navbar styles for responsiveness */
+        .menu-button {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            /* color: #FF1801; */
+            box-shadow: none;
+            padding: none;
+        }
 
+        #menu-div {
+            display: flex;
+            gap: 20px;
+            box-shadow: none;
+        }
+
+        @media screen and (max-width: 700px) {
+            #menu-div {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 13vh;
+                left: 10%;
+                right: 10%;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                z-index: 1000;
+            }
+
+            #menu-div.show {
+                display: flex;
+            }
+
+            .menu-button {
+                display: block;
+            }
+        }
+    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var theme = localStorage.getItem("theme");
             if (theme) {
-            applyTheme(theme);
+                applyTheme(theme);
             }
         });
 
@@ -25,29 +66,29 @@
             var cards = document.querySelectorAll('.nav-card');
 
             if (currentFilename === "sun.png") {
-            themeImage.src = "{% static 'moon.png' %}";
-            if (profileImage) {
-                profileImage.src = "{% static 'light-profile-icon.png' %}";
-            }
-            body.classList.remove('light-mode');
-            body.classList.add('dark-mode');
-            cards.forEach(function(card) {
-                card.classList.remove('light');
-                card.classList.add('dark');
-            });
-            localStorage.setItem("theme", "dark-mode");
+                themeImage.src = "{% static 'moon.png' %}";
+                if (profileImage) {
+                    profileImage.src = "{% static 'light-profile-icon.png' %}";
+                }
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                cards.forEach(function(card) {
+                    card.classList.remove('light');
+                    card.classList.add('dark');
+                });
+                localStorage.setItem("theme", "dark-mode");
             } else {
-            themeImage.src = "{% static 'sun.png' %}";
-            if (profileImage) {
-                profileImage.src = "{% static 'profileicon.png' %}";
-            }
-            body.classList.remove('dark-mode');
-            body.classList.add('light-mode');
-            cards.forEach(function(card) {
-                card.classList.remove('dark');
-                card.classList.add('light');
-            });
-            localStorage.setItem("theme", "light-mode");
+                themeImage.src = "{% static 'sun.png' %}";
+                if (profileImage) {
+                    profileImage.src = "{% static 'profileicon.png' %}";
+                }
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                cards.forEach(function(card) {
+                    card.classList.remove('dark');
+                    card.classList.add('light');
+                });
+                localStorage.setItem("theme", "light-mode");
             }
 
             return false;
@@ -57,144 +98,93 @@
             var themeImage = document.getElementById("theme_switch");
             var profileImage = document.getElementById("profile_image");
             var body = document.body;
-            var cards = document.querySelectorAll('.nav-card');
+            var cards = document.querySelectorAll('.light');
 
             if (theme === "dark-mode") {
-            themeImage.src = "{% static 'moon.png' %}";
-            if (profileImage) {
-                profileImage.src = "{% static 'light-profile-icon.png' %}";
-            }
-            body.classList.remove('light-mode');
-            body.classList.add('dark-mode');
-            cards.forEach(function(card) {
-                card.classList.remove('light');
-                card.classList.add('dark');
-            });
+                themeImage.src = "{% static 'moon.png' %}";
+                if (profileImage) {
+                    profileImage.src = "{% static 'light-profile-icon.png' %}";
+                }
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                cards.forEach(function(card) {
+                    card.classList.remove('light');
+                    card.classList.add('dark');
+                });
             } else {
-            themeImage.src = "{% static 'sun.png' %}";
-            if (profileImage) {
-                profileImage.src = "{% static 'profileicon.png' %}";
-            }
-            body.classList.remove('dark-mode');
-            body.classList.add('light-mode');
-            cards.forEach(function(card) {
-                card.classList.remove('dark');
-                card.classList.add('light');
-            });
+                themeImage.src = "{% static 'sun.png' %}";
+                if (profileImage) {
+                    profileImage.src = "{% static 'profileicon.png' %}";
+                }
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                cards.forEach(function(card) {
+                    card.classList.remove('dark');
+                    card.classList.add('light');
+                });
             }
         }
-    </script>
 
+        function toggleMenu() {
+            const menu = document.getElementById('menu-div');
+            menu.classList.toggle('show');
+            if (menu.classList.contains('show')) {
+                menu.style.maxHeight = menu.scrollHeight + "px";
+            } else {
+                menu.style.maxHeight = "0";
+            }
+
+        }
+    </script>
 </head>
 
 <body class="light-mode">
-
     <div class="navbar">
-        <div class="nav-card light navbar centre-vert" style="width: 100%;">
-            <a  href="{% url 'index' %}" class ="link header"><p class="button-red">PredictF1</p></a>
+        <div class="nav-card light navbar centre-vert card-margin" style="width: 100%;">
+            <a href="{% url 'index' %}" class="link header">
+                <p class="button-red">PredictF1</p>
+            </a>
             <div style="margin-right: 2%;"></div>
-            
-            <p class="centre-vert" style="padding-right: 2%;color: #FF1801; font-size: 25px;">|<p>
-            
-                
-            <div id="dropdown-div" class="navbar centre-vert" style="width: 100%;justify-content: space-evenly;">
-                <a href="{% url 'about' %}" class ="link button-red"><p class="button-red">About</p></a>
-            
-                <a href="{% url 'nextSteps' %}" class ="link button-red"><p class="button-red">Next Steps</p></a>
-                
+
+            <p class="centre-vert" style="padding-right: 2%; color: #FF1801; font-size: 25px;">|</p>
+
+            <button class="nav-card light menu-button" onclick="toggleMenu()" style="margin-left: auto;">☰</button>
+
+            <div class="nav-card navbar centre-vert light" id="menu-div">
+                <a href="{% url 'about' %}" class="link button-red pr-5">
+                    <p class="button-red">About</p>
+                </a>
+                <a href="{% url 'nextSteps' %}" class="link button-red pr-5">
+                    <p class="button-red">Next Steps</p>
+                </a>
+
                 {% if not user.is_authenticated %}
-
-                    <a href="{% url 'login' %}" class ="link button-red"><p>Login</p></a>
-
-                    <a href="{% url 'signup' %}" class ="link button-red"><p>Sign Up</p></a>
+                    <a href="{% url 'login' %}" class="link button-red pr-5">
+                        <p>Login</p>
+                    </a>
+                    <a href="{% url 'signup' %}" class="link button-red pr-5">
+                        <p>Sign Up</p>
+                    </a>
                 {% endif %}
             </div>
-
         </div>
         <div style="margin-right: 2%;"></div>
 
-        <div class="nav-card navbar light centre-vert" style="justify-content: space-evenly;">
+        <div class="nav-card navbar light centre-vert card-margin">
             {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class ="link" style="padding-right: 20%;"><img id="profile_image" class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture"></a>
+                <a href="{% url 'logout' %}" class="link" style="padding-right: 20%;">
+                    <img id="profile_image" class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture">
+                </a>
             {% endif %}
             <img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()">
         </div>
     </div>
 
-    <div style="margin-top: 2vh;margin-bottom: 2vh;">
-    {% block content %}
-    {% endblock %}
+    <div style="margin-top: 2vh; margin-bottom: 2vh;">
+        {% block content %}
+        {% endblock %}
     </div>
     <footer>
     </footer>
-
 </body>
 </html>
-
-<!-- <div class="dropdown">
-                <button class="dropbtn">Menu</button>
-                <div class="dropdown-content">
-                    <a href="{% url 'about' %}">About</a>
-                    <a href="{% url 'nextSteps' %}">Next Steps</a>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}">Logout</a>
-                    {% else %}
-                        <a href="{% url 'login' %}">Login</a>
-                        <a href="{% url 'signup' %}">Sign Up</a>
-                    {% endif %}
-                </div>
-            </div>
-
-            <style>
-                .dropdown {
-                    display: none;
-                }
-
-                @media screen and (max-width: 600px) {
-                    .navbar.centre-vert > a,
-                    .navbar.centre-vert > div {
-                        display: none;
-                    }
-
-                    .dropdown {
-                        display: block;
-                    }
-                }
-
-                .dropbtn {
-                    background-color: #FF1801;
-                    color: white;
-                    padding: 16px;
-                    font-size: 16px;
-                    border: none;
-                    cursor: pointer;
-                }
-
-                .dropdown-content {
-                    display: none;
-                    position: absolute;
-                    background-color: #f9f9f9;
-                    min-width: 160px;
-                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-                    z-index: 1;
-                }
-
-                .dropdown-content a {
-                    color: black;
-                    padding: 12px 16px;
-                    text-decoration: none;
-                    display: block;
-                }
-
-                .dropdown-content a:hover {
-                    background-color: #f1f1f1;
-                }
-
-                .dropdown:hover .dropdown-content {
-                    display: block;
-                }
-
-                .dropdown:hover .dropbtn {
-                    background-color: #3e8e41;
-                }
-            </style> -->

@@ -73,12 +73,16 @@ body {
 .nav-card {
     /* background-color: #ffff; */
     border-radius: 8px;
+}
+
+.card-margin{
     padding: 0 2em 0 2em; /* Top, right, bottom, left */ 
 }
 
 .profile-image {
     height: 2em;
     width: 2em;
+    cursor: pointer;
 }
 
 .centre-vert {
@@ -159,4 +163,8 @@ body {
 
 .card-padding{
     padding: 1em;
+}
+
+.pr-5{
+    padding-right: 2vh;
 }
