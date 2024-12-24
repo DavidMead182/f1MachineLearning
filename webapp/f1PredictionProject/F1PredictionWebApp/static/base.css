@@ -168,3 +168,59 @@ body {
 .pr-5{
     padding-right: 2vh;
 }
+
+.w-100 {
+    width: 100%;
+}
+
+.nav-line {
+    padding-right: 2%;
+    color: #FF1801;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.menu-button {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    /* color: #FF1801; */
+    box-shadow: none;
+    padding: none;
+}
+
+#menu-div {
+    display: flex;
+    gap: 20px;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 768px) {
+    #menu-div {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 13vh;
+        left: 10%;
+        right: 10%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        z-index: 1000;
+    }
+
+    #menu-div.show {
+        display: flex;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+    .nav-line {
+        display: none;
+    }
+
+}

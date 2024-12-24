@@ -5,148 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'base.css' %}">
+    <script src="{% static 'base.js' %}"></script>
+
     <title>PredictF1 - {% block title %} {% endblock %}</title>
-    <style>
-        /* Navbar styles for responsiveness */
-        .menu-button {
-            display: none;
-            font-size: 24px;
-            cursor: pointer;
-            background: none;
-            border: none;
-            /* color: #FF1801; */
-            box-shadow: none;
-            padding: none;
-        }
 
-        #menu-div {
-            display: flex;
-            gap: 20px;
-            box-shadow: none;
-        }
-
-        @media screen and (max-width: 700px) {
-            #menu-div {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 13vh;
-                left: 10%;
-                right: 10%;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                z-index: 1000;
-            }
-
-            #menu-div.show {
-                display: flex;
-            }
-
-            .menu-button {
-                display: block;
-            }
-        }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var theme = localStorage.getItem("theme");
-            if (theme) {
-                applyTheme(theme);
-            }
-        });
-
-        function toggleTheme() {
-            var themeImage = document.getElementById("theme_switch");
-            var profileImage = document.getElementById("profile_image");
-
-            var currentSrc = themeImage.src;
-            var currentFilename = currentSrc.split('/').pop();
-            var body = document.body;
-            var cards = document.querySelectorAll('.nav-card');
-
-            if (currentFilename === "sun.png") {
-                themeImage.src = "{% static 'moon.png' %}";
-                if (profileImage) {
-                    profileImage.src = "{% static 'light-profile-icon.png' %}";
-                }
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                cards.forEach(function(card) {
-                    card.classList.remove('light');
-                    card.classList.add('dark');
-                });
-                localStorage.setItem("theme", "dark-mode");
-            } else {
-                themeImage.src = "{% static 'sun.png' %}";
-                if (profileImage) {
-                    profileImage.src = "{% static 'profileicon.png' %}";
-                }
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                cards.forEach(function(card) {
-                    card.classList.remove('dark');
-                    card.classList.add('light');
-                });
-                localStorage.setItem("theme", "light-mode");
-            }
-
-            return false;
-        }
-
-        function applyTheme(theme) {
-            var themeImage = document.getElementById("theme_switch");
-            var profileImage = document.getElementById("profile_image");
-            var body = document.body;
-            var cards = document.querySelectorAll('.light');
-
-            if (theme === "dark-mode") {
-                themeImage.src = "{% static 'moon.png' %}";
-                if (profileImage) {
-                    profileImage.src = "{% static 'light-profile-icon.png' %}";
-                }
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                cards.forEach(function(card) {
-                    card.classList.remove('light');
-                    card.classList.add('dark');
-                });
-            } else {
-                themeImage.src = "{% static 'sun.png' %}";
-                if (profileImage) {
-                    profileImage.src = "{% static 'profileicon.png' %}";
-                }
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                cards.forEach(function(card) {
-                    card.classList.remove('dark');
-                    card.classList.add('light');
-                });
-            }
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('menu-div');
-            menu.classList.toggle('show');
-            if (menu.classList.contains('show')) {
-                menu.style.maxHeight = menu.scrollHeight + "px";
-            } else {
-                menu.style.maxHeight = "0";
-            }
-
-        }
-    </script>
 </head>
 
 <body class="light-mode">
     <div class="navbar">
-        <div class="nav-card light navbar centre-vert card-margin" style="width: 100%;">
+        <div class="nav-card light navbar centre-vert card-margin w-100">
             <a href="{% url 'index' %}" class="link header">
                 <p class="button-red">PredictF1</p>
             </a>
             <div style="margin-right: 2%;"></div>
 
-            <p class="centre-vert" style="padding-right: 2%; color: #FF1801; font-size: 25px;">|</p>
+            <p class="nav-line">|</p>
 
             <button class="nav-card light menu-button" onclick="toggleMenu()" style="margin-left: auto;">☰</button>
 
