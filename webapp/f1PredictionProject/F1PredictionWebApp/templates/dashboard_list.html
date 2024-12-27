@@ -3,10 +3,55 @@
 {% block title %}Dashboard List{% endblock %}
 
 {% block content %}
-<h1>Articles</h1>
+
+<div class="title-padding navbar centre-vert" style="gap: 2.5%;">
+    <p class="smallheader centre bold">Your Dashboards</p><div class="red-line w-82-5"></div>
+</div>
+
+<div class = "centreDiv overflow-contianer" >
 {% for dashboard in object_list %}
-  <ul>
-    <li><a href="{{ dashboard.get_absolute_url }}">{{ dashboard.title }}</a></li>
-  </ul>
+    {% if dashboard.author == request.user %}
+    <div class="nav-card light card-padding card-top-bottom min-w-20">
+        <a href="{{ dashboard.get_absolute_url }}" class="link centre">
+
+            <p>{{ dashboard.title }}</p>
+            <p>{{ dashboard.author }}</p>
+            <p>{{ dashboard.date_posted }}</p>
+
+        </a>
+    </div>
+    {% endif %}
 {% endfor %}
+
+{% if user.is_authenticated %}
+<a href="" class="link centre">
+    <p class="button-red">Create Dashboard</p>
+</a>
+{% endif %}
+
+
+{% if not user.is_authenticated %}
+<p>To create your own dashboards you need to <a class = "link button-red" href="{ % url 'signup' % }">Sign Up</a></p>
+{% endif %} 
+</div>
+
+<div class="title-padding navbar centre-vert" style="gap: 2.5%;">
+    <p class="smallheader centre bold">Other Dashboards</p><div class="red-line w-80"></div>
+</div>
+
+<div class = "centreDiv overflow-contianer">
+    {% for dashboard in object_list %}
+        {% if dashboard.author != request.user %}
+        <div class="nav-card light card-padding card-top-bottom min-w-20">
+            <a href="{{ dashboard.get_absolute_url }}" class="link centre">
+    
+                <p>{{ dashboard.title }}</p>
+                <p>{{ dashboard.author }}</p>
+                <p>{{ dashboard.date_posted }}</p>
+    
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
+    </div>
 {% endblock %}

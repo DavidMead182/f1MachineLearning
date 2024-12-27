@@ -79,6 +79,11 @@ body {
     padding: 0 2em 0 2em; /* Top, right, bottom, left */ 
 }
 
+.card-top-bottom{
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
 .profile-image {
     height: 2em;
     width: 2em;
@@ -183,6 +188,24 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
 }
+.red-line{
+    height: 1vh;
+    border-radius: 8px;
+    background-color: #FF1801;
+}
+
+.w-40{
+    width: 40%;
+}
+
+.w-82-5{
+    width: 82.5%;
+}
+
+.w-80{
+    width: 81%;
+}
+
 
 .menu-button {
     display: none;
@@ -206,7 +229,7 @@ body {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 13vh;
+        top: 10vh;
         left: 10%;
         right: 10%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -231,4 +254,23 @@ body {
 
 .registration-box{
     padding: 0 2vh 2vh 2vh; /* Top, right, bottom, left */
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.title-padding {
+    padding-top: 0.5vh;
+    padding-bottom: 0.5vh;
+}
+
+.min-w-20 {
+    min-width: 20%;
+}
+
+.overflow-contianer {
+    display: flex; 
+    gap:2%; 
+    flex-wrap: wrap;
 }
