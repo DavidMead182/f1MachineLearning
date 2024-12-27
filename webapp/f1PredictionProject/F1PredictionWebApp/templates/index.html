@@ -5,29 +5,7 @@
 
 {% block content %}
 <div class="nav-card light card-padding">
-    <p class="header centre">Most Recent Race Dashboard - {{ eventName }}</p>
-    <div class = "navbar">
-        <div class = "centre" style="width: 15%;">
-            <p class="smallheader">Standings</p>
-            <table style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th>Position</th>
-                        <th>Driver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for result in results %}
-                    <tr>
-                        <td>{{ result.Position }}</td>
-                        <td>{{ result.Abbreviation }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-    </div>
+    <p class="header centre">F1 Calendar - 2024 Season</p>
 </div>
 {% endblock %}
 

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard List{% endblock %}
+
+{% block content %}
+<h1>Articles</h1>
+{% for dashboard in object_list %}
+  <ul>
+    <li><a href="{{ dashboard.get_absolute_url }}">{{ dashboard.title }}</a></li>
+  </ul>
+{% endfor %}
+{% endblock %}

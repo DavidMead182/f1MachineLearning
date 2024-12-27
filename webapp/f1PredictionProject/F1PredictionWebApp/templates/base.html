@@ -30,22 +30,26 @@
                 <a href="{% url 'nextSteps' %}" class="link button-red pr-5">
                     <p class="button-red">Next Steps</p>
                 </a>
-
-                {% if not user.is_authenticated %}
-                    <a href="{% url 'login' %}" class="link button-red pr-5">
-                        <p>Login</p>
-                    </a>
-                    <a href="{% url 'signup' %}" class="link button-red pr-5">
-                        <p>Sign Up</p>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'dashboards' %}" class="link button-red pr-5">
+                        <p class="button-red">Dashboards</p>
                     </a>
                 {% endif %}
             </div>
         </div>
         <div style="margin-right: 2%;"></div>
 
-        <div class="nav-card navbar light centre-vert card-margin">
+        <div class="nav-card navbar light centre-vert card-margin centre" style="justify-content: space-between;">
+            {% if not user.is_authenticated %}
+                    <a href="{% url 'login' %}" class="link button-red pr-5 centre">
+                        <p>Login</p>
+                    </a>
+                    <a href="{% url 'signup' %}" class="link button-red pr-5 centre">
+                        <p style="white-space: nowrap;">Sign Up</p>
+                    </a>
+            {% endif %}
             {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="link" style="padding-right: 20%;">
+                <a href="{% url 'logout' %}" class="link centre pr-5">
                     <img id="profile_image" class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture">
                 </a>
             {% endif %}

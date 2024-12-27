@@ -9,17 +9,17 @@ import fastf1 as ff1
 # Create your views here.
 def index(request):
     context = {}
-    last_race_id, year, schedule = most_recent_race()
-    session = ff1.get_session(year, last_race_id, 'R')
-    session.load()
-    df = pd.DataFrame(session.results)
-    df['Position'] = df['Position'].astype(int)
-    results = df[['Position', 'Abbreviation']]
+    # last_race_id, year, schedule = most_recent_race()
+    # session = ff1.get_session(year, last_race_id, 'R')
+    # session.load()
+    # df = pd.DataFrame(session.results)
+    # df['Position'] = df['Position'].astype(int)
+    # results = df[['Position', 'Abbreviation']]
 
-    # path = telementry(year, last_race_id)
+    # # path = telementry(year, last_race_id)
 
-    context = { "eventName": session.event['EventName'],
-        "results": results.to_dict(orient='records')}
+    # context = { "eventName": session.event['EventName'],
+    #     "results": results.to_dict(orient='records')}
     return render(request, 'index.html', context)
 
 def user_login(request):
@@ -62,20 +62,17 @@ def about_page(request):
 def nextSteps(request):
     return render(request, 'nextSteps.html')
 
+from django.views.generic import ListView, DetailView
+from .models import Dashboard
 
-from django.contrib.auth.views import PasswordResetView
+class DashboardListView(ListView):
+    model = Dashboard
+    template_name = 'dashboard_list.html'
 
-class CustomPasswordResetView(PasswordResetView):
- template_name = 'password_reset.html'
- email_template_name = 'password_reset_email.html'
- subject_template_name = 'password_reset_subject.txt'
- success_url = '/password_reset/done/' 
+class DashboardDetailView(DetailView):
+    model = Dashboard
+    template_name = 'dashboard_detail.html'
 
-from django.contrib.auth.views import PasswordResetConfirmView
-
-class CustomPasswordResetConfirmView(PasswordResetConfirmView):
- template_name = 'password_reset_confirm.html'
- success_url = '/password_reset/complete/' 
 
 
 
