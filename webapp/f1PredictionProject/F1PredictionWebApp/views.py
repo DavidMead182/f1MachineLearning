@@ -3,23 +3,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
+from django.http import JsonResponse
+import json
 
-import fastf1 as ff1
+import fastf1
+from datetime import datetime
 
 # Create your views here.
 def index(request):
-    context = {"season":2024}
-    # last_race_id, year, schedule = most_recent_race()
-    # session = ff1.get_session(year, last_race_id, 'R')
-    # session.load()
-    # df = pd.DataFrame(session.results)
-    # df['Position'] = df['Position'].astype(int)
-    # results = df[['Position', 'Abbreviation']]
-
-    # # path = telementry(year, last_race_id)
-
-    # context = { "eventName": session.event['EventName'],
-    #     "results": results.to_dict(orient='records')}
+    context = get_schedule()
     return render(request, 'index.html', context)
 
 def user_login(request):
@@ -77,7 +69,32 @@ class DashboardDetailView(DetailView):
 
 
 
+def get_schedule(current_year=datetime.now().year):
 
+    # Fetch the season schedule
+    schedule = fastf1.get_event_schedule(current_year, include_testing=False)
+
+    schedule_list = []
+
+    for i in range(len(schedule)):
+        temp_event = schedule.get_event_by_round(i+1)
+        event_format = "Conventional" if temp_event["EventFormat"] == "conventional" else "Sprint Qualification"
+        temp_dict = {
+            "round": temp_event["RoundNumber"],
+            "event_name": temp_event["EventName"],
+            "weekend" : f"{temp_event['Session1Date'].strftime('%d %b')} - {temp_event['Session5Date'].strftime('%d %b')}",
+            "location": temp_event["Location"],
+            "country": temp_event["Country"],
+            "type": event_format,
+        }
+        schedule_list.append(temp_dict)
+
+    context = {
+        "year": current_year,
+        "schedule": schedule_list
+    }
+
+    return context
 
 
 # Helper functions
