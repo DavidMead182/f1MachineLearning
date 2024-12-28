@@ -83,7 +83,9 @@ body {
     margin-top: 1em;
     margin-bottom: 1em;
 }
-
+.border-size-1{
+    border-width: 1px;
+}
 .profile-image {
     height: 2em;
     width: 2em;
