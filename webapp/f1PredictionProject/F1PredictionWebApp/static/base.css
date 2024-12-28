@@ -340,3 +340,19 @@ body {
 .f1-table.dark tr:hover {
     background-color: #555;
 }
+
+.f1-table.light thead {
+    background-color: #f2f2f2;
+}
+
+.f1-table.dark thead {
+    background-color: #444;
+}
+
+.border-8{
+    border-radius: 8px;
+}
+
+.font{
+    font-family: site-font;
+}

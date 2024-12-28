@@ -11,6 +11,12 @@ from datetime import datetime
 
 # Create your views here.
 def index(request):
+    if request.method == 'POST':
+        year = request.POST.get('year')
+        if year:
+            context = get_schedule(int(year))
+            return render(request, 'index.html', context)
+        
     context = get_schedule()
     return render(request, 'index.html', context)
 
@@ -70,96 +76,38 @@ class DashboardDetailView(DetailView):
 
 
 def get_schedule(current_year=datetime.now().year):
-
-    # Fetch the season schedule
-    schedule = fastf1.get_event_schedule(current_year, include_testing=False)
-
+    
+    errors = None
+    if current_year < 1950:
+        current_year = datetime.now().year
+        errors = f"No data for this year, defaulting to current year"
+    elif current_year > datetime.now().year:
+        current_year = datetime.now().year
+        errors = f"No data for this year, defaulting to current year"
+    
     schedule_list = []
+    schedule = fastf1.get_event_schedule(year=current_year, include_testing=False)
 
     for i in range(len(schedule)):
         temp_event = schedule.get_event_by_round(i+1)
-        event_format = "Conventional" if temp_event["EventFormat"] == "conventional" else "Sprint Qualification"
+        event_format = "Conventional" if temp_event.get("EventFormat", "-") == "conventional" else "Sprint Qualification"
         temp_dict = {
-            "round": temp_event["RoundNumber"],
-            "event_name": temp_event["EventName"],
-            "weekend" : f"{temp_event['Session1Date'].strftime('%d %b')} - {temp_event['Session5Date'].strftime('%d %b')}",
-            "location": temp_event["Location"],
-            "country": temp_event["Country"],
+            "round": temp_event.get("RoundNumber", "-"),
+            "event_name": temp_event.get("EventName", "-"),
+            "weekend": f"{temp_event.get('Session1Date', '-').strftime('%d %b')} - {temp_event.get('Session5Date', '-').strftime('%d %b')}" if temp_event.get('Session1Date') and temp_event.get('Session5Date') else "-",
+            "location": temp_event.get("Location", "-"),
+            "country": temp_event.get("Country", "-"),
             "type": event_format,
         }
         schedule_list.append(temp_dict)
 
+    
+
     context = {
         "year": current_year,
-        "schedule": schedule_list
+        "schedule": schedule_list,
+        "errors": errors,
+        "available_years": list(range(1950, datetime.now().year+1)),
+        "current_year": current_year
     }
-
     return context
-
-
-# Helper functions
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib import colormaps
-from matplotlib.collections import LineCollection
-import fastf1
-from datetime import date,datetime, timezone,timedelta
-import fastf1
-import pandas as pd
-import os
-
-def most_recent_race():
-    today = date.today()
-    year = today.year
-    schedule = fastf1.get_event_schedule(year)
-    utc_now = datetime.now(timezone.utc) + timedelta(hours=4)
-    last_race_id = 0
-    for dates in schedule['Session5Date']:
-        if pd.isna(dates):
-            continue
-        else:
-            if dates < utc_now:
-                last_race_id = last_race_id +1
-    print(schedule.loc[last_race_id, "EventName"])
-    return last_race_id, year, schedule
-
-def telementry(year, session_number):
-    schedule = fastf1.get_event_schedule(year)
-    session = fastf1.get_session(year, session_number, 'R')
-    session.load()
-    
-    lap = session.laps.pick_fastest()
-    tel = lap.get_telemetry()
-
-    x = np.array(tel['X'].values)
-    y = np.array(tel['Y'].values)
-    
-    points = np.array([x, y]).T.reshape(-1, 1, 2)
-    segments = np.concatenate([points[:-1], points[1:]], axis=1)
-    gear = tel['nGear'].to_numpy().astype(float)
-
-    cmap = colormaps['Paired']
-    lc_comp = LineCollection(segments, norm=plt.Normalize(1, cmap.N+1), cmap=cmap)
-    lc_comp.set_array(gear)
-    lc_comp.set_linewidth(4)
-
-    plt.gca().add_collection(lc_comp)
-    plt.axis('equal')
-    plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
-    
-    title = plt.suptitle(
-        f"Fastest Lap Gear Shift Visualization\n"
-        f"{lap['Driver']} - {session.event['EventName']} {session.event.year}"
-    )
-    
-    cbar = plt.colorbar(mappable=lc_comp, label="Gear",
-                        boundaries=np.arange(1, 10))
-    cbar.set_ticks(np.arange(1.5, 9.5))
-    cbar.set_ticklabels(np.arange(1, 9))
-
-    if os.path.exists('./F1PredictionWebApp/static/images/recent_tel.png'):
-            os.remove('./F1PredictionWebApp/static/images/recent_tel.png')  # Remove the existing file
-    
-    plt.savefig('./F1PredictionWebApp/static/images/recent_tel.png', bbox_inches='tight', dpi=300)
-
-    return '/images/recent_tel.png'

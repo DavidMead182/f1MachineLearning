@@ -8,8 +8,28 @@
     <p class="smallheader centre bold no-text-wrap">F1 Schedule - {{ year }} season</p>
     <div class="red-line w-100"></div>
 </div>
-<table class="nav-card light f1-table w-100 card-padding" >
-    <thead>
+
+<form method="POST" action="" class="nav-card light card-padding centre-vert" style="gap: 2.5%;">
+    {% csrf_token %}
+    <label for="year" class="bold">Select Year:</label>
+    <select name="year" id="year" class="border-8 font centre w-40 button-red hover-grow">
+        {% for year in available_years %}
+        <option value="{{ year }}" {% if year == current_year %}selected{% endif %}>
+            {{ year }}
+        </option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="button-red border-8 w-40 font hover-grow">Find Schedule</button>
+</form>
+
+{% if errors %}
+<div class="centre smallheader" style="padding-bottom: 1vh;" role="alert">
+    Error: {{ errors }}
+</div>
+{% endif %}
+
+<table class="nav-card light f1-table w-100 card-padding">
+    <thead class="card-padding">
         <tr>
             <th style="border-top-left-radius: 8px; border-bottom-left-radius: 8px;">Round</th>
             <th>Grand Prix</th>
