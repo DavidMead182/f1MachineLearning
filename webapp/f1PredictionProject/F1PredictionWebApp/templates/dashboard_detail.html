@@ -1,10 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Dashboard Detail{% endblock %}
+{% block title %}Dashboard - {{ object.title }}{% endblock %}
 
 {% block content %}
-<div>
-    <h2>{{ object.title }}</h2>
-    <p>{{ object.body }}</p>
-  </div>
+
+<div class="title-padding navbar centre-vert" style="gap: 2.5%;">
+    <p class="smallheader centre bold no-text-wrap">{{ object.title }}</p><div class="red-line w-100"></div>
+    {% if dashboard.author == request.user %}
+    <a href="" class="link centre nav-card">
+        <img class="profile-image hover-grow" src="{% static 'edit.png' %}" alt="Create New Dashboard">
+    </a>
+    {% endif %}
+</div>
+
+<div class="nav-card light card-padding card-top-bottom">
+    {{ object.content }}
+</div>
 {% endblock %}

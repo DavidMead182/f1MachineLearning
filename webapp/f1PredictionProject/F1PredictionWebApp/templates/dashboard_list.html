@@ -1,17 +1,34 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}Dashboard List{% endblock %}
+{% block title %}Dashboards{% endblock %}
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <div class="title-padding navbar centre-vert" style="gap: 2.5%;">
-    <p class="smallheader centre bold">Your Dashboards</p><div class="red-line w-82-5"></div>
+    <p class="smallheader centre bold no-text-wrap">Your Dashboards</p><div class="red-line w-100"></div>
+
+<a href="" class="link centre">
+    <img class="profile-image hover-grow" src="{% static 'Add-dash.png' %}" alt="Create New Dashboard">
+</a>
 </div>
+
+{% endif %}
+
+{% if not user.is_authenticated %}
+
+<div class="title-padding navbar centre-vert" style="gap: 2.5%;">
+    <p class="smallheader centre bold no-text-wrap" >Your Dashboards</p><div class="red-line w-100"></div>
+</div>
+
+{% endif %}
+
 
 <div class = "centreDiv overflow-contianer" >
 {% for dashboard in object_list %}
     {% if dashboard.author == request.user %}
-    <div class="nav-card light card-padding card-top-bottom min-w-20">
+    <div class="nav-card light card-padding card-top-bottom min-w-20 hover-grow">
         <a href="{{ dashboard.get_absolute_url }}" class="link centre">
 
             <p>{{ dashboard.title }}</p>
@@ -23,32 +40,27 @@
     {% endif %}
 {% endfor %}
 
-{% if user.is_authenticated %}
-<a href="" class="link centre">
-    <p class="button-red">Create Dashboard</p>
-</a>
-{% endif %}
 
 
 {% if not user.is_authenticated %}
-<p>To create your own dashboards you need to <a class = "link button-red" href="{ % url 'signup' % }">Sign Up</a></p>
+<p>To create your own dashboards you need to <a class = "link button-red" href="{% url 'signup' %}">Sign Up</a></p>
 {% endif %} 
 </div>
 
 <div class="title-padding navbar centre-vert" style="gap: 2.5%;">
-    <p class="smallheader centre bold">Other Dashboards</p><div class="red-line w-80"></div>
+    <p class="smallheader centre bold no-text-wrap">Other Dashboards</p><div class="red-line w-100"></div>
 </div>
 
 <div class = "centreDiv overflow-contianer">
     {% for dashboard in object_list %}
         {% if dashboard.author != request.user %}
-        <div class="nav-card light card-padding card-top-bottom min-w-20">
+        <div class="nav-card light card-padding card-top-bottom min-w-20 hover-grow">
             <a href="{{ dashboard.get_absolute_url }}" class="link centre">
-    
-                <p>{{ dashboard.title }}</p>
-                <p>{{ dashboard.author }}</p>
-                <p>{{ dashboard.date_posted }}</p>
-    
+        
+            <p>{{ dashboard.title }}</p>
+            <p>{{ dashboard.author }}</p>
+            <p>{{ dashboard.date_posted }}</p>
+        
             </a>
         </div>
         {% endif %}

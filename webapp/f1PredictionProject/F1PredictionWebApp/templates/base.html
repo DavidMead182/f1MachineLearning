@@ -21,7 +21,7 @@
 
             <p class="nav-line">|</p>
 
-            <button class="nav-card light menu-button button-red" onclick="toggleMenu()" style="margin-left: auto;">☰</button>
+            <button class="nav-card light menu-button button-red hover-grow" onclick="toggleMenu()" style="margin-left: auto;">☰</button>
 
             <div class="nav-card navbar centre-vert light" id="menu-div">
                 <a href="{% url 'about' %}" class="link button-red pr-5">
@@ -43,15 +43,15 @@
                         <p>Login</p>
                     </a>
                     <a href="{% url 'signup' %}" class="link button-red pr-5 centre" >
-                        <p style="white-space: nowrap;">Sign Up</p>
+                        <p class="no-text-wrap">Sign Up</p>
                     </a>
             {% endif %}
             {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}" class="link centre pr-5">
-                    <img id="profile_image" class="profile-image" src="{% static 'profileicon.png' %}" alt="Profile Picture">
+                    <img id="profile_image" class="profile-image hover-grow" src="{% static 'profileicon.png' %}" alt="Profile Picture">
                 </a>
             {% endif %}
-            <img class="profile-image" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()">
+            <img class="profile-image hover-grow" id="theme_switch" src="{% static 'sun.png' %}" alt="Theme Image" onmouseup="toggleTheme()">
         </div>
     </div>
 

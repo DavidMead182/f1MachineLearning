@@ -8,7 +8,7 @@ import fastf1 as ff1
 
 # Create your views here.
 def index(request):
-    context = {}
+    context = {"season":2024}
     # last_race_id, year, schedule = most_recent_race()
     # session = ff1.get_session(year, last_race_id, 'R')
     # session.load()
