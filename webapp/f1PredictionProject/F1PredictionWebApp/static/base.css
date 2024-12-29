@@ -121,14 +121,12 @@ body {
 }
 
 .button{
-    width: 20em; 
-    border-radius: 5px; 
+    border-radius: 8px; 
     height: 5vh;
     font-family: site-font;
     font-weight: bold;
     font-size: 2vh;
     border-width: 2px;
-
 }
 
 .card-top-bottom{
@@ -154,13 +152,13 @@ body {
 }
 
 .input-box{
-    border-radius: 5px;
+    border-radius: 8px;
     border-width: 2px;
     height: 5vh; 
-    font-family: site-font; 
-    width: 20em; 
+    font-family: site-font;  
     font-size: 2.5vh;
     padding-left: 1vh;
+    padding-right: 1vh;
 }
 
 .form-title{
@@ -238,7 +236,11 @@ body {
     box-shadow: none;
 }
 
-@media screen and (max-width: 768px) {
+.bg-white{
+    background-color: #fff;
+}
+
+@media screen and (max-width: 1000px) {
     #menu-div {
         display: none;
         flex-direction: column;
@@ -267,7 +269,7 @@ body {
 }
 
 .registration-box{
-    padding: 0 2vh 2vh 2vh; /* Top, right, bottom, left */
+    width: fit-content;
 }
 
 .bold {

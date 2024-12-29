@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="centreDiv centre-vert">
-    <div class="nav-card light card-top-bottom centreDiv centre-vert registration-box" style="width: 25em; padding-bottom: 10%;">
+    <div class="nav-card light card-top-bottom centreDiv centre-vert registration-box" style="width: 25em; padding-bottom: 5%;">
         <!-- Login form -->
         <form method="POST" action="">
             {% csrf_token %}
@@ -22,8 +22,8 @@
             {% for message in messages %}
             <p>{{ message }}</p>
             {% endfor %}
-            <div class="centre">
-                <input class="button-white button"  type="submit" value="Login" />
+            <div class="centreDiv centre">
+                <input class="button-white button w-100"  type="submit" value="Login" />
             </div>
         </form>
     </div>

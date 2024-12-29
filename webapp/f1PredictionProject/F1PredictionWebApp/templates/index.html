@@ -12,14 +12,14 @@
 <form method="POST" action="" class="nav-card light card-padding centre-vert" style="gap: 2.5%;">
     {% csrf_token %}
     <label for="year" class="bold no-text-wrap">Select a Year:</label>
-    <select name="year" id="year" class="light border-8 font centre w-45 button-red hover-grow bold border-size-1">
+    <select name="year" id="year" class="bg-white border-8 font centre w-45 button-red hover-grow bold border-size-1">
         {% for year in available_years %}
         <option class="hover-grow" value="{{ year }}" {% if year == current_year %}selected{% endif %}>
             {{ year }}
         </option>
         {% endfor %}
     </select>
-    <button type="submit" class="light border-8 font centre w-45 button-red hover-grow bold border-size-1">Find Schedule</button>
+    <button type="submit" class="bg-white button-red border-8 w-45 font hover-grow bold border-size-1">Find Schedule</button>
 </form>
 
 {% if errors %}

@@ -5,6 +5,7 @@ from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 import json
+import bleach
 
 import fastf1
 from datetime import datetime
@@ -63,13 +64,13 @@ def nextSteps(request):
 from django.views.generic import ListView, DetailView
 from .models import Dashboard
 
-class DashboardListView(ListView):
-    model = Dashboard
-    template_name = 'dashboard_list.html'
+def dashboards(request):
+    context = {'object_list': Dashboard.objects.all()}
+    return render(request, 'dashboard_list.html', context)
 
-class DashboardDetailView(DetailView):
-    model = Dashboard
-    template_name = 'dashboard_detail.html'
+def dashboard(request, pk):
+    context = {'object': Dashboard.objects.get(pk=pk)}
+    return render(request, 'dashboard_detail.html', context)
 
 
 

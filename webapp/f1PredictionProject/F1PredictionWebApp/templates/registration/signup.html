@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="centreDiv">
-    <div class="nav-card light card-top-bottom centreDiv registration-box" style="width: 25em;padding-bottom: 5%;">
-        <form action="" method="POST">
+    <div class="nav-card light card-top-bottom centreDiv registration-box" style="width: 25em; padding-bottom:5%">
+        <form action="" method="POST"">
             <p class="smallheader centre form-title">Sign Up</p>
             {% csrf_token %}
             <label class="header" for="username">Username:</label>
@@ -33,8 +33,8 @@
             <p>{{ message }}</p>
 
             {% endfor %}
-            <div class="centre">
-                <input class="button-white button" type="submit" name="Create User" />
+            <div class="centreDiv centre">
+                <input type="submit" class="button-white button w-100" name="Create User" />
             </div>
         </form>
 
