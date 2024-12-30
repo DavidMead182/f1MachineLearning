@@ -4,8 +4,6 @@ from django.contrib import messages
 from .forms import CreateUserForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-import json
-import bleach
 
 import fastf1
 from datetime import datetime
@@ -66,10 +64,15 @@ from .models import Dashboard
 
 def dashboards(request):
     context = {'object_list': Dashboard.objects.all()}
+
     return render(request, 'dashboard_list.html', context)
 
 def dashboard(request, pk):
-    context = {'object': Dashboard.objects.get(pk=pk)}
+    content = Dashboard.objects.get(pk=pk).get_content()
+
+    print(type(content))
+    context = {'object': Dashboard.objects.get(pk=pk),
+               'content': content}
     return render(request, 'dashboard_detail.html', context)
 
 

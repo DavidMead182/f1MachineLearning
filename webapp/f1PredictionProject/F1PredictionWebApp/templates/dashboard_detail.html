@@ -7,7 +7,7 @@
 
 <div class="title-padding navbar centre-vert" style="gap: 2.5%;">
     <p class="smallheader centre bold no-text-wrap">{{ object.title }}</p><div class="red-line w-100"></div>
-    {% if author == request.user %}
+    {% if object.author == request.user %}
     <a href="" class="link centre nav-card">
         <img class="profile-image hover-grow" src="{% static 'edit.png' %}" alt="Create New Dashboard">
     </a>
@@ -15,6 +15,6 @@
 </div>
 
 <div class="nav-card light card-padding card-top-bottom">
-    {{ object.content }}
+    {{ content|safe }}
 </div>
 {% endblock %}
